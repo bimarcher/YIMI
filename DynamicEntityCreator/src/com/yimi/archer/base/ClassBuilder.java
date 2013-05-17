@@ -37,7 +37,7 @@ public class ClassBuilder {
 		JavaFileBuilder.build("Hello","");
 		JavaFileBuilder.javac("Hello");
 
-		Class Hello = Class.forName("Hello");
+		Class<?> Hello = Class.forName("Hello");
 		Object hello = Hello.newInstance();
 		Method sayHi = Hello.getMethod("sayHi", new Class[0]);
 		sayHi.invoke(hello, new Object[0]);

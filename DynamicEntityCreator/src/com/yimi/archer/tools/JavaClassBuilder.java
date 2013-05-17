@@ -18,7 +18,7 @@ public class JavaClassBuilder {
 			throws IOException {
 
 		// 1、将类名称分解成[com.yimi.arche.Hello]的形式
-		String[] pathList = _className.split(".");
+		String[] pathList = _className.split("\\.");
 
 		// 2、记录当前的类路径，初始值为classpath
 		String nowPath = m_class_path;
@@ -62,9 +62,10 @@ public class JavaClassBuilder {
 	 * @param _className
 	 * @param _classContent
 	 * @throws IOException
+	 * @throws InterruptedException
 	 */
 	public static void build(String _className, String _classContent)
-			throws IOException {
+			throws IOException, InterruptedException {
 
 		HashMap<String, Object> hm = buildPath(_className);
 		String filePath = (String) hm.get("filePath");
@@ -72,13 +73,17 @@ public class JavaClassBuilder {
 		FileWriter fw = new FileWriter(filePath);
 		fw.write(_classContent);
 		fw.close();
+
+		javac(_className);
+
+		File file = new File(filePath);
+		file.delete();
 	}
 
-	private static int javac(String _className) throws IOException,
+	private static int javac(String _filePath) throws IOException,
 			InterruptedException {
 		Runtime runtime = Runtime.getRuntime();
-		String filePath = m_class_path + _className + ".java";
-		Process proc = runtime.exec("javac " + filePath);
+		Process proc = runtime.exec("javac " + _filePath);
 		int exitVal = proc.waitFor();
 		return exitVal;
 
@@ -86,6 +91,6 @@ public class JavaClassBuilder {
 
 	static void main(String args[]) {
 		StringBuffer sb = new StringBuffer();
-		JavaFileBuilder.build("com.yimi.judy.Hello", "");
+		JavaFileBuilder.build("com.yimi.judy.Hello", sb.toString());
 	}
 }
