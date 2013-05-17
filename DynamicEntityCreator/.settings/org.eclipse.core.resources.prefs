@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
 encoding//WebContent/WEB-INF=UTF-8
+encoding//test/com/yimi/archer/eo/RoleEOTest.java=UTF-8
+encoding//test/com/yimi/archer/eo/UserEOTest.java=UTF-8

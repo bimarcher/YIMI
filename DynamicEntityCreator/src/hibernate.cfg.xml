@@ -20,6 +20,7 @@
 
 		<!-- 加入实体类的映射文件 -->
 		<mapping class="com.yimi.archer.eo.UserEO" />
+		<mapping class="com.yimi.archer.eo.RoleEO" />
 
 	</session-factory>
 </hibernate-configuration>

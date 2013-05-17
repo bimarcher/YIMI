@@ -1,36 +1,46 @@
 package com.yimi.archer.base;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.net.URL;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import com.yimi.archer.tools.JavaFileBuilder;
 
 public class ClassBuilder {
-	private static URL m_classpath_url = ClassLoader.getSystemResource("");
+	private static String m_classpath_url = ClassLoader.getSystemResource("")
+			.getFile();
 
-	public static Class build(String _className) throws IOException {
+	public static Class<?> build(String _className) throws IOException {
 
-		String sourceFilePath = m_classpath_url.getFile() + _className + ".java";
-		// File sourceFile = new File(sourceFilePath);
+		String sourceFilePath = m_classpath_url + _className + ".java";
+		FileWriter fw = new FileWriter(sourceFilePath);
+		fw.write("something");
 
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
-				new FileOutputStream(sourceFilePath)));
-		bw.write("something");
+		fw.close();
 
-		// Runtime runtime = Runtime.getRuntime();
-		// try {
-		// runtime.exec("javac e:\\" + _className);
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
+		Runtime runtime = Runtime.getRuntime();
+		try {
+			runtime.exec("javac e:\\" + _className);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return null;
 	}
 
-	public static void main(String[] args) throws IOException {
-		System.out.println(ClassBuilder.m_classpath_url);
-		ClassBuilder.build("Hello");
+	public static void main(String[] args) throws IOException,
+			ClassNotFoundException, InstantiationException,
+			IllegalAccessException, IllegalArgumentException,
+			InvocationTargetException, SecurityException, NoSuchMethodException {
+
+		JavaFileBuilder.build("Hello","");
+		JavaFileBuilder.javac("Hello");
+
+		Class Hello = Class.forName("Hello");
+		Object hello = Hello.newInstance();
+		Method sayHi = Hello.getMethod("sayHi", new Class[0]);
+		sayHi.invoke(hello, new Object[0]);
+
 	}
 }
