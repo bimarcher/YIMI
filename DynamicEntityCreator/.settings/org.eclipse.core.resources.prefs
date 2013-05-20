@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
 encoding//WebContent/WEB-INF=UTF-8
+encoding//groovysrc/com/yimi/archer/tools/JavaFileBuilder.groovy=UTF-8
+encoding//src/com/yimi/archer/tools/JavaClassBuilder.java=UTF-8
 encoding//test/com/yimi/archer/eo/RoleEOTest.java=UTF-8
 encoding//test/com/yimi/archer/eo/UserEOTest.java=UTF-8

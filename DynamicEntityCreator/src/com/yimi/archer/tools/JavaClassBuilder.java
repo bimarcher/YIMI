@@ -10,20 +10,20 @@ public class JavaClassBuilder {
 			.getFile();
 
 	/**
-	 * ´´½¨ÀàÂ·¾¶
+	 * åˆ›å»ºç±»è·¯å¾„
 	 * 
 	 * @throws IOException
 	 */
 	private static HashMap<String, Object> buildPath(String _className)
 			throws IOException {
 
-		// 1¡¢½«ÀàÃû³Æ·Ö½â³É[com.yimi.arche.Hello]µÄĞÎÊ½
+		// 1ã€å°†ç±»åç§°åˆ†è§£æˆ[com.yimi.arche.Hello]çš„å½¢å¼
 		String[] pathList = _className.split("\\.");
 
-		// 2¡¢¼ÇÂ¼µ±Ç°µÄÀàÂ·¾¶£¬³õÊ¼ÖµÎªclasspath
+		// 2ã€è®°å½•å½“å‰çš„ç±»è·¯å¾„ï¼Œåˆå§‹å€¼ä¸ºclasspath
 		String nowPath = m_class_path;
 
-		// 3¡¢±éÀú£¬Èç¹ûÄ¿Â¼È±Ê§Ôò´´½¨
+		// 3ã€éå†ï¼Œå¦‚æœç›®å½•ç¼ºå¤±åˆ™åˆ›å»º
 		int levelSum = pathList.length;
 		for (int level = 0; level < levelSum - 1; level++) {
 			nowPath = nowPath + pathList[level] + "/";
@@ -34,7 +34,7 @@ public class JavaClassBuilder {
 			dir.mkdir();
 		}
 
-		// 4¡¢Èç¹ûjavaÎÄ¼ş²»´æÔÚ£¬Ôò´´½¨¿ÕµÄjavaÎÄ¼ş
+		// 4ã€å¦‚æœjavaæ–‡ä»¶ä¸å­˜åœ¨ï¼Œåˆ™åˆ›å»ºç©ºçš„javaæ–‡ä»¶
 		String fileName = pathList[levelSum - 1] + ".java";
 		nowPath = nowPath + fileName;
 		File javaFile = new File(nowPath);
@@ -42,7 +42,7 @@ public class JavaClassBuilder {
 			javaFile.createNewFile();
 		}
 
-		// 5¡¢·µ»ØÀàÂ·¾¶
+		// 5ã€è¿”å›ç±»è·¯å¾„
 
 		String javaPackage = _className.substring(0,
 				_className.lastIndexOf("."));
@@ -57,7 +57,7 @@ public class JavaClassBuilder {
 	}
 
 	/**
-	 * ´´½¨javaÎÄ¼ş²¢ÇÒ±àÒë
+	 * åˆ›å»ºjavaæ–‡ä»¶å¹¶ä¸”ç¼–è¯‘
 	 * 
 	 * @param _className
 	 * @param _classContent

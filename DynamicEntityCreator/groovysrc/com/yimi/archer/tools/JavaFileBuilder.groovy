@@ -3,28 +3,29 @@
  */
 package com.yimi.archer.tools
 
-import org.codehaus.groovy.antlr.Main
+import org.codehaus.groovy.antlr.Main
+
 
 /**
  * @author chezg
- * ÓÃÀ´´´½¨*.javaÎÄ¼ş
+ * ç”¨æ¥åˆ›å»º*.javaæ–‡ä»¶
  *
  */
 public class JavaFileBuilder{
 	def static m_class_path = ClassLoader.getSystemResource("").getFile();
 	
 	/**
-	 * ´´½¨ÀàÂ·¾¶
+	 * åˆ›å»ºç±»è·¯å¾„
 	 */
 	def private static buildPath(String _className){
 		
-		// 1¡¢½«ÀàÃû³Æ·Ö½â³É[com.yimi.arche.Hello]µÄĞÎÊ½
+		// 1ã€å°†ç±»åç§°åˆ†è§£æˆ[com.yimi.arche.Hello]çš„å½¢å¼
 		def pathList = _className.tokenize(".")
 		
-		// 2¡¢¼ÇÂ¼µ±Ç°µÄÀàÂ·¾¶£¬³õÊ¼ÖµÎªclasspath
+		// 2ã€è®°å½•å½“å‰çš„ç±»è·¯å¾„ï¼Œåˆå§‹å€¼ä¸ºclasspath
 		def nowPath = m_class_path;
 		
-		// 3¡¢±éÀú£¬Èç¹ûÄ¿Â¼È±Ê§Ôò´´½¨
+		// 3ã€éå†ï¼Œå¦‚æœç›®å½•ç¼ºå¤±åˆ™åˆ›å»º
 		def levelSum = pathList.size();
 		for(level in 0..<(levelSum-1)){
 			nowPath = nowPath + pathList.get(level) + "/";
@@ -35,14 +36,14 @@ public class JavaFileBuilder{
 			dir.mkdir();
 		}
 		
-		// 4¡¢Èç¹ûjavaÎÄ¼ş²»´æÔÚ£¬Ôò´´½¨¿ÕµÄjavaÎÄ¼ş
+		// 4ã€å¦‚æœjavaæ–‡ä»¶ä¸å­˜åœ¨ï¼Œåˆ™åˆ›å»ºç©ºçš„javaæ–‡ä»¶
 		nowPath = nowPath + pathList.get(levelSum-1) + ".java";
 		File javaFile = new File(nowPath);
 		if(!javaFile.exists()){
 			javaFile.createNewFile();
 		}
 		
-		// 5¡¢·µ»ØÀàÂ·¾¶
+		// 5ã€è¿”å›ç±»è·¯å¾„
 		return nowPath;
 	}
 	
